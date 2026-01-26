@@ -33,21 +33,251 @@ h1 {
     margin: 0 auto;
     position: relative;
     background-color: #333;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
     overflow: hidden;
     top: 50px;
     margin-top: 50px;
 }
 
 #robot {
-    width: 63.75px;
-    height: 105.5px;
+    width: 32px;
+    height: 53px;
     background-image: url('botty_sheet-removebg-preview-cropped.png');
     background-repeat: no-repeat;
+    background-size: 127.5px 105.5px;
     position: absolute;
-    /* Initial position will be set by JS */
     top: 0;
     left: 0;
-
-    /* Pixelated look for sprites often looks better */
     image-rendering: pixelated;
+}
+
+#controls {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#command-list {
+    width: 600px;
+    height: 40px;
+    background: #444;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 5px;
+    overflow-x: auto;
+    color: #ddd;
+    font-size: 14px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+.queue-item {
+    width: 24px;
+    height: 24px;
+    background-color: #4da6ff;
+    position: relative;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.queue-item::before {
+    content: '';
+    position: absolute;
+    background-color: white;
+    border-radius: 1px;
+}
+
+.queue-item::after {
+    content: '';
+    position: absolute;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+.queue-item.up::before {
+    width: 2px;
+    height: 8px;
+    left: 11px;
+    top: 9px;
+}
+
+.queue-item.up::after {
+    width: 6px;
+    height: 6px;
+    transform: rotate(225deg);
+    left: 8px;
+    top: 6px;
+}
+
+.queue-item.down::before {
+    width: 2px;
+    height: 8px;
+    left: 11px;
+    top: 7px;
+}
+
+.queue-item.down::after {
+    width: 6px;
+    height: 6px;
+    transform: rotate(45deg);
+    left: 8px;
+    top: 11px;
+}
+
+.queue-item.left::before {
+    width: 8px;
+    height: 2px;
+    left: 9px;
+    top: 11px;
+}
+
+.queue-item.left::after {
+    width: 6px;
+    height: 6px;
+    transform: rotate(135deg);
+    left: 6px;
+    top: 8px;
+}
+
+.queue-item.right::before {
+    width: 8px;
+    height: 2px;
+    left: 7px;
+    top: 11px;
+}
+
+.queue-item.right::after {
+    width: 6px;
+    height: 6px;
+    transform: rotate(-45deg);
+    left: 11px;
+    top: 8px;
+}
+
+.buttons-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.arrow-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #4da6ff;
+    transition: background-color 0.1s, transform 0.1s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 0 #3b82f6;
+    /* 3D effect */
+    transition: transform 0.1s;
+}
+
+.arrow-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #3b82f6;
+    background-color: #FFD700;
+    /* Yellow */
+}
+
+.arrow-btn.active {
+    background-color: #FFD700;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #3b82f6;
+}
+
+.arrow-btn::before,
+.arrow-btn::after {
+    transition: all 0.2s;
+}
+
+.arrow-btn::before {
+    content: '';
+    width: 4px;
+    height: 15px;
+    background-color: white;
+    position: absolute;
+    border-radius: 2px;
+}
+
+.arrow-btn::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-right: 4px solid white;
+    border-bottom: 4px solid white;
+    position: absolute;
+}
+
+.arrow-up::before {
+    top: 18px;
+    height: 16px;
+}
+
+.arrow-up::after {
+    transform: rotate(225deg);
+    top: 12px;
+}
+
+.arrow-down::before {
+    top: 16px;
+    height: 16px;
+}
+
+.arrow-down::after {
+    transform: rotate(45deg);
+    top: 26px;
+}
+
+.arrow-left::before {
+    width: 16px;
+    height: 4px;
+    left: 18px;
+}
+
+.arrow-left::after {
+    transform: rotate(135deg);
+    left: 12px;
+}
+
+.arrow-right::before {
+    width: 16px;
+    height: 4px;
+    left: 16px;
+}
+
+.arrow-right::after {
+    transform: rotate(-45deg);
+    left: 26px;
+}
+
+
+#play-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #388E3C;
+    transition: transform 0.1s;
+}
+
+#play-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #388E3C;
 }

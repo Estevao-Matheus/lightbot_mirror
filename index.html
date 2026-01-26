@@ -10,9 +10,23 @@
 
 <body>
     <div class="container">
-        <h1>Use as setas DIREITA, ESQUERDA, CIMA e BAIXO para mover o robô</h1>
+        <h1>Use as setas DIREITA, ESQUERDA, CIMA e BAIXO para registrar comandos e mover o robô</h1>
         <div id="arena">
             <div id="robot"></div>
+        </div>
+        <div id="controls">
+            <div class="buttons-row">
+                <div class="arrow-btn arrow-up" data-dir="up"></div>
+            </div>
+            <div class="buttons-row">
+                <div class="arrow-btn arrow-left" data-dir="left"></div>
+                <div id="play-btn">PLAY</div>
+                <div class="arrow-btn arrow-right" data-dir="right"></div>
+            </div>
+            <div class="buttons-row">
+                <div class="arrow-btn arrow-down" data-dir="down"></div>
+            </div>
+            <div id="command-list"></div>
         </div>
     </div>
     <script src="script.js"></script>
