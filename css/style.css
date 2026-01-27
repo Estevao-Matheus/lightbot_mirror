@@ -1,7 +1,7 @@
  body {
       padding: 0;
       margin: 0;
-      background-color: #1b1b1b;
+      background-color: #000000;
     }
     /* body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,9 +19,56 @@
     text-align: center;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100%
+}
+.control-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+.comand-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   width: 30rem;
+   height: 5.5rem;
+   background-color: #333;
+   border-radius: 10px;
+   padding:0.5rem;
+   margin-top: 1rem;
+}
+.main-method {
+    display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   gap: 0.5rem;
+   width: 30rem;
+   min-height: 15rem;
+   flex-wrap: wrap;
+   background-color: #333;
+   border-radius: 10px;
+   padding:0.5rem;
+   margin-top: 1rem;
+}
+.image-button {
+    height: 5.5rem;
+    background: #999999;
+    border: none;
+    padding: 0;
+    cursor: pointer; 
+    border-style: solid;
+    border-color: #000000;
 }
 
+.image-button img {
+    width: 5rem;
+    height: auto; 
+    display: block; 
+}
+
+.image-button:hover {
+    opacity: 0.8;
+}
 h1 {
     position: absolute;
     width: 100%;
@@ -49,10 +96,7 @@ h1 {
     background-image: url('botty_sheet-removebg-preview-cropped.png');
     background-repeat: no-repeat;
     position: absolute;
-    /* Initial position will be set by JS */
     top: 0;
     left: 0;
-
-    /* Pixelated look for sprites often looks better */
     image-rendering: pixelated;
 }
