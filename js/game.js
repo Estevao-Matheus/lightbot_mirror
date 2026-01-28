@@ -30,9 +30,25 @@ let grid = [
 let grid1 = [
   [1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1],
-  [1, 1, 5, 1, 1],
-  [1, 1, 5, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
   [1, 1, 10, 1, 1],
+  ];
+
+let grid2 = [
+  [1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 1, 5, 1, 1],
+  [1, 5, 10, 1, 1],
+  ];
+
+let grid3 = [
+  [1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 1, 5, 1, 1],
+  [1, 1, 5, 1, 1],
+  [1, 5, 10, 5, 1],
   ];
 
 
@@ -140,17 +156,40 @@ function moveFoward() {
   let newY = bot.y + 1;  
   
   if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+    let currentTile = grid1[bot.y][bot.x];
+    let targetTile = grid1[newY][newX];
+    if (targetTile === 5 && currentTile !== 5) {
+      console.log("Movimento inválido: precisa pular para subir no nível superior");
+      return;
+    }
+    if (currentTile === 5 && targetTile !== 5) {
+      console.log("Movimento inválido: precisa pular para descer do nível superior");
+      return;
+    }
+    
     bot.x = newX;
     bot.y = newY;
   } else {
-    console.log("Movimento inválido: fora dos limites do grid");
+    console.log("");
   }
 }
+
+
 function moveRight() {
   let newX = bot.x - 1;
   let newY = bot.y;
   
-  if (newX >= GRID_SIZE) {
+  if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+    let currentTile = grid1[bot.y][bot.x];
+    let targetTile = grid1[newY][newX];
+    
+    // Verificar se precisa pular para mudar de nível
+    if ((targetTile === 5 && currentTile !== 5) || 
+        (currentTile === 5 && targetTile !== 5)) {
+      console.log("Movimento inválido: precisa pular para mudar de nível");
+      return;
+    }
+    
     bot.x = newX;
   } else {
     console.log("Não pode mover para direita: limite do grid alcançado");
@@ -160,14 +199,42 @@ function moveRight() {
 function moverLeft() {
   let newX = bot.x + 1;
   let newY = bot.y;
-  if (newX < GRID_SIZE)
-   {
+  
+  if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+    let currentTile = grid1[bot.y][bot.x];
+    let targetTile = grid1[newY][newX];
+
+    if ((targetTile === 5 && currentTile !== 5) || 
+        (currentTile === 5 && targetTile !== 5)) {
+      console.log("Movimento inválido: precisa pular para mudar de nível");
+      return;
+    }
+    
     bot.x = newX;
   } else {
     console.log("Não pode mover para esquerda: limite do grid alcançado");
   }
 }
-
+function jump() {
+  let newX = bot.x;
+  let newY = bot.y + 1;
+  
+  if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+    let currentTile = grid1[bot.y][bot.x];
+    let targetTile = grid1[newY][newX];
+    
+    if ((targetTile === 5 && currentTile !== 5) || 
+        (currentTile === 5 && targetTile !== 5) ||
+        (targetTile !== 5 && currentTile !== 5)) {
+      bot.x = newX;
+      bot.y = newY;
+    } else {
+      console.log("Pulo desnecessário: ambos os tiles estão no mesmo nível");
+    }
+  } else {
+    console.log("Pulo inválido: fora dos limites do grid");
+  }
+}
 async function playMovements() {
   const comandsExecution = [...comandQuery];
   const delayBetweenMovements = 500; 
@@ -212,4 +279,5 @@ function stopGame() {
   bot.x = 0;
   bot.y = 0;
   comandQuery = [];
+  mainMethod.innerHTML = ''; 
 }
